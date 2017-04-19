@@ -419,6 +419,7 @@ public class ApplicationMaster {
     // Register self with ResourceManager
     // This will start heartbeating to the RM
     appMasterHostname = NetUtils.getHostname();
+    appMasterTrackingUrl = InetAddress.getLocalHost().getHostName() + ":" + TensorBoardServer.spawn(this);
     RegisterApplicationMasterResponse response = rmWrapper.getClient()
         .registerApplicationMaster(appMasterHostname, appMasterRpcPort, appMasterTrackingUrl);
     // Dump out information about cluster capability as seen by the resource manager
@@ -511,9 +512,6 @@ public class ApplicationMaster {
    * @return list of all TensorBoards, or null if not yet available
    */
   public List<String> getTensorBoardEndpoints() {
-    if (clusterSpecServer == null) {
-      return null;
-    }
     return new ArrayList<>(clusterSpecServer.getTensorBoards().values());
   }
   
