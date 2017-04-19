@@ -17,6 +17,7 @@
  */
 package io.hops.tensorflow;
 
+import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -38,12 +39,13 @@ public class TensorBoardServer {
     s.close();
     
     HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-    server.createContext("/", new HttpHandler() {
+    server.createContext("/tensorboards", new HttpHandler() {
       @Override
-      public void handle(HttpExchange httpExchange) throws IOException {
-        String response = am.getTensorBoardEndpoints().toString();
-        httpExchange.sendResponseHeaders(200, response.length());
-        httpExchange.getResponseBody().write(response.getBytes());
+      public void handle(HttpExchange he) throws IOException {
+        String response = new Gson().toJson(am.getTensorBoardEndpoints());
+        he.getResponseHeaders().set("Content-Type", "application/json; charset=utf-8");
+        he.sendResponseHeaders(200, response.length());
+        he.getResponseBody().write(response.getBytes());
       }
     });
     server.start();
