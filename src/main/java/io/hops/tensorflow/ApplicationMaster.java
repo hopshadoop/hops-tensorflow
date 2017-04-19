@@ -463,13 +463,13 @@ public class ApplicationMaster {
     
     // Send request for containers to RM
     for (int i = 0; i < numWorkers; i++) {
-      ContainerRequest containerAsk = setupContainerAskForRM(true);
-      rmWrapper.getClient().addContainerRequest(containerAsk);
+      ContainerRequest workerRequest = setupContainerAskForRM(true);
+      rmWrapper.getClient().addContainerRequest(workerRequest);
     }
     numRequestedContainers.addAndGet(numWorkers);
     for (int i = 0; i < numPses; i++) {
-      ContainerRequest containerAsk = setupContainerAskForRM(false);
-      rmWrapper.getClient().addContainerRequest(containerAsk);
+      ContainerRequest psRequest = setupContainerAskForRM(false);
+      rmWrapper.getClient().addContainerRequest(psRequest);
     }
     numRequestedContainers.addAndGet(numPses);
   }
