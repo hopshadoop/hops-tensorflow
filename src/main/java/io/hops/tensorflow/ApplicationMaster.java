@@ -721,9 +721,8 @@ public class ApplicationMaster {
       
       // https://www.tensorflow.org/deploy/hadoop
       // https://www.tensorflow.org/install/install_linux
-      if (jobName.equals("worker") && containerGPUs < 1) {
-        vargs.add("LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$JAVA_HOME/jre/lib/amd64/server");
-      } else {
+      vargs.add("LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$JAVA_HOME/jre/lib/amd64/server");
+      if (containerGPUs > 0) {
         vargs.add("CUDA_HOME=/usr/local/cuda");
         vargs.add("LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64");
         vargs.add("PATH=$PATH:$CUDA_HOME/bin");
