@@ -513,7 +513,7 @@ public class ApplicationMaster {
    *
    * @return list of all TensorBoards, or null if not yet available
    */
-  public List<String> getTensorBoardEndpoints() {
+  public List<String> getTensorBoardEndpoint() {
     return new ArrayList<>(clusterSpecServer.getTensorBoards().values());
   }
   

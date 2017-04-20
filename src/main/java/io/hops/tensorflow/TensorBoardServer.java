@@ -39,10 +39,10 @@ public class TensorBoardServer {
     s.close();
     
     HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-    server.createContext("/tensorboards", new HttpHandler() {
+    server.createContext("/tensorboard", new HttpHandler() {
       @Override
       public void handle(HttpExchange he) throws IOException {
-        String response = new Gson().toJson(am.getTensorBoardEndpoints());
+        String response = new Gson().toJson(am.getTensorBoardEndpoint());
         he.getResponseHeaders().set("Content-Type", "application/json; charset=utf-8");
         he.sendResponseHeaders(200, response.length());
         he.getResponseBody().write(response.getBytes());
