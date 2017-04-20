@@ -711,7 +711,7 @@ public class ApplicationMaster {
       envCopy.put("TASK_INDEX", Integer.toString(taskIndex));
       if (jobName.equals("worker")) {
         envCopy.put("TB_DIR", "tensorboard_" + taskIndex);
-        if (tensorboard) {
+        if (tensorboard && taskIndex == 0) {
           envCopy.put("TENSORBOARD", "true");
         }
       }
