@@ -79,7 +79,7 @@ import static io.hops.tensorflow.ApplicationMasterArguments.ENV;
 import static io.hops.tensorflow.ApplicationMasterArguments.HELP;
 import static io.hops.tensorflow.ApplicationMasterArguments.MAIN_RELATIVE;
 import static io.hops.tensorflow.ApplicationMasterArguments.MEMORY;
-import static io.hops.tensorflow.ApplicationMasterArguments.PRIORITY;
+// import static io.hops.tensorflow.ApplicationMasterArguments.PRIORITY;
 import static io.hops.tensorflow.ApplicationMasterArguments.PSES;
 import static io.hops.tensorflow.ApplicationMasterArguments.VCORES;
 import static io.hops.tensorflow.ApplicationMasterArguments.WORKERS;
@@ -132,7 +132,7 @@ public class ApplicationMaster {
   private int containerMemory;
   private int containerVirtualCores;
   private int containerGPUs;
-  private int requestPriority;
+  // private int requestPriority;
   private boolean tensorboard;
   
   // Timeout threshold for container allocation
@@ -316,7 +316,7 @@ public class ApplicationMaster {
     if (!(numWorkers > 0 && numPses > 0  || numWorkers == 1 && numPses == 0)) {
       throw new IllegalArgumentException("Invalid no. of workers or parameter server");
     }
-    requestPriority = Integer.parseInt(cliParser.getOptionValue(PRIORITY, "0"));
+    // requestPriority = Integer.parseInt(cliParser.getOptionValue(PRIORITY, "0"));
     
     allocationTimeout = Long.parseLong(cliParser.getOptionValue(ALLOCATION_TIMEOUT, "15")) * 1000;
     
@@ -493,11 +493,13 @@ public class ApplicationMaster {
    * @return the setup ResourceRequest to be sent to RM
    */
   public ContainerRequest setupContainerAskForRM(boolean worker) {
-    Priority pri = Priority.newInstance(requestPriority);
+    Priority pri = Priority.newInstance(1);
     
     // Set up resource type requirements
     Resource capability = Resource.newInstance(containerMemory, containerVirtualCores);
+    
     if (worker) {
+      pri.setPriority(0); // worker: 0, ps: 1
       capability.setGPUs(containerGPUs);
     }
     
