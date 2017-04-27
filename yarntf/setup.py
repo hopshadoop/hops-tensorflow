@@ -9,21 +9,21 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
   name='yarntf',
-  version='0.0.2.dev10-SNAPSHOT',
-  description='Easy distributed TensorFlow on Hadoop',
+  version='0.0.2.dev10',
+  description='Easy distributed TensorFlow on Hops Hadoop',
   long_description=long_description,
   url='https://github.com/tobiajo/yarntf',
   author='Tobias Johansson',
   author_email='tobias@johansson.xyz',
   license='Apache License 2.0',
   classifiers=[
-    'Development Status :: 2 - Pre-Alpha',
+    'Development Status :: 3 - Alpha',
     'Intended Audience :: Developers',
     'Topic :: Software Development :: Libraries',
     'License :: OSI Approved :: Apache Software License',
     'Programming Language :: Python :: 2.7',
   ],
-  keywords='yarn tf hadoop tensorflow',
+  keywords='yarn tf hops hadoop tensorflow',
   packages=find_packages(exclude=['examples', 'tests']),
   install_requires=['grpcio', 'tensorflow'],
 )
