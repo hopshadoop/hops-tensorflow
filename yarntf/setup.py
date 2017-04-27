@@ -12,7 +12,7 @@ setup(
   version='0.0.2.dev10',
   description='Easy distributed TensorFlow on Hops Hadoop',
   long_description=long_description,
-  url='https://github.com/tobiajo/yarntf',
+  url='https://github.com/hopshadoop/hops-tensorflow',
   author='Tobias Johansson',
   author_email='tobias@johansson.xyz',
   license='Apache License 2.0',
